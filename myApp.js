@@ -11,6 +11,10 @@ require ('dotenv').config();
 //     }
 // })
 
+app.use(function middleware(req, res, next) {
+    console.log(req.method + " " + req.path + "json - " + req.ip);
+    next();
+})
 
 
 

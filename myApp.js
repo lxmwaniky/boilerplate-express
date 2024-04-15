@@ -1,6 +1,7 @@
 let express = require('express');
 let app = express();
 require ('dotenv').config();
+var bodyParser = require("body-parser");
 
 
 // app.get('/json', (req, res) => {
@@ -23,16 +24,29 @@ require ('dotenv').config();
 //     res.send({time: req.time});
 //   });
 
-app.get("/:word/echo", (req, res) => {
-    const { word } = req.params;
+// app.get("/:word/echo", (req, res) => {
+//     const { word } = req.params;
+//     res.json({
+//       echo: word
+//     });
+//   });
+
+app.get("/name", function(req, res) {
+    var firstName = req.query.first;
+    var lastName = req.query.last;
+
+    var { first: firstName, last: lastName } = req.query;
+
     res.json({
-      echo: word
+      name: `${firstName} ${lastName}`
     });
   });
 
 
-
-
+app.post("/name", function(req, res) {
+    var string = req.body.first + " " + req.body.last;
+    res.json({ name: string });
+  });
 
 
 
